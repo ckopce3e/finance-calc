@@ -1,21 +1,29 @@
-body {
-    font-family: Arial, sans-serif;
+body, html {
     margin: 0;
-    padding: 20px;
-    background-color: #f4f4f4;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
     text-align: center;
 }
 
+h2 {
+    margin-top: 0;
+}
+
 .container {
-    max-width: 800px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+/*    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Высота на весь экран */
+    max-width: 1200px; /* Стандартная максимальная ширина */
+    margin: 0 auto; /* Выравнивание по центру */
+    padding: 20px; /* Внутренние отступы */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Легкая тень для выделения */
+    background-color: #ffffff; /* Фон контейнера */
 }
 
 form {
@@ -41,25 +49,25 @@ button:hover {
     background-color: #218838;
 }
 
-ul {
+/*ul {
     list-style-type: none;
     padding: 0;
-}
+}*/
 
-li {
+/*li {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #ccc;
-}
+}*/
 
 .reference-card {
-    background: #e9ecef;
-    padding: 20px;
-    border-radius: 8px;
-    margin-top: 20px;
+    /*flex: 0 0 30%; /* Занимает 30% от высоты */
+    background-color: #f7f7f7;
+    padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Если содержимое длиннее, добавляется скролл */
 }
 
 .reference-card h2 {
@@ -67,18 +75,82 @@ li {
     text-align: center;
 }
 
+/* Основной контент с доходами и расходами */
+.main-content {
+    flex: 1; /* Занимает оставшиеся 80% */
+    display: flex;
+    justify-content: space-between; /* Доходы и расходы будут по бокам */
+    padding: 20px;
+}
 
-@media (max-width: 600px) {
-    form {
+/* Блок доходов слева */
+.income-section {
+    flex: 1;
+    margin-right: 10px;
+    background-color: #e0f7fa;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Блок расходов справа */
+.expense-section {
+    flex: 1;
+    margin-left: 10px;
+    background-color: #ffe0b2;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для блока с бюджетом */
+.budget-display {
+    display: flex;
+    justify-content: space-between; /* Равномерное распределение */
+    align-items: center;
+    padding: 10px 0;
+    border-top: 2px solid #ccc; /* Верхний разделитель */
+    border-bottom: 2px solid #ccc; /* Нижний разделитель */
+    background-color: #f8f8f8;
+    margin-bottom: 20px; /* Отступы снизу */
+}
+
+.budget-item {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    padding: 0 20px;
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+}
+
+.budget-item:first-child {
+    justify-content: flex-start; /* Общий доход слева */
+}
+
+.budget-item:last-child {
+    justify-content: flex-end; /* Баланс справа */
+}
+
+.budget-item:not(:last-child)::after {
+    content: '|'; /* Вертикальный разделитель */
+    margin-left: 20px;
+    color: #ccc;
+}
+
+@media (max-width: 768px) {
+    .main-content {
         flex-direction: column;
     }
-
-    button {
-        width: 100%;
+    
+    .income-section, .expense-section {
+        margin: 0;
+        margin-bottom: 20px;
     }
+}
 
-    li {
-        flex-direction: column;
-        align-items: flex-start;
+@media (max-width: 1200px) {
+    .container {
+        width: 100%; /* Ширина контейнера при меньших экранах */
+        padding: 10px; /* Уменьшенные отступы */
     }
 }
