@@ -4,57 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Финансовый планировщик</title>
+    <title>Планировщик финансов</title>
 </head>
 <body>
     <div class="container">
         <h1>Семейный бюджет</h1>
         
-        <section>
-            <h2>Доходы</h2>
-            <form id="incomeForm">
-                <label for="income">Введите доход:</label>
-                <input type="number" id="income" required>
-                <button type="submit">Добавить доход</button>
-            </form>
-            <button id="clearIncomes">Очистить все доходы</button>
-            <ul id="incomeList"></ul>
-        </section>
+        <!-- Форма для доходов -->
+        <form id="incomeForm">
+            <input type="number" id="income" placeholder="Введите доход" required>
+            <select id="userSelect"></select>
+            <button type="submit">Добавить доход</button>
+        </form>
+        <button id="clearIncomes">Очистить все доходы</button>
+        <ul id="incomeList"></ul>
+            
+        <!-- Форма для расходов -->
+        <form id="expenseForm">
+            <input type="number" id="expense" placeholder="Введите расход" required>
+            <select id="categorySelect"></select>
+            <button type="submit">Добавить расход</button>
+        </form>
+        <button id="clearExpenses">Очистить все расходы</button>
+        <ul id="expenseList"></ul>
         
-        <section>
-            <h2>Расходы</h2>
-            <form id="expenseForm">
-                <label for="expense">Введите расход:</label>
-                <input type="number" id="expense" required>
+        <!-- Отображение бюджета -->
+        <h2>Общий доход: <span id="totalIncome">0.00</span></h2>
+        <h2>Общие расходы: <span id="totalExpenses">0.00</span></h2>
+        <h2>Баланс: <span id="balance">0.00</span></h2>
 
-                <label for="categorySelect">Выберите категорию:</label>
-                <select id="categorySelect" required>
-                    <option value="" disabled selected>Выберите категорию</option>
-                </select>
-
-                <button type="submit">Добавить расход</button>
-            </form>
-            <button id="clearExpenses">Очистить все расходы</button>
-            <ul id="expenseList"></ul>
-        </section>
-        
-        <section>
-            <h2>Итог</h2>
-            <p>Общий доход: <span id="totalIncome">0</span></p>
-            <p>Общие расходы: <span id="totalExpenses">0</span></p>
-            <p>Оставшийся баланс: <span id="balance">0</span></p>
-        </section>
-
-        <section>
-            <h2>Категории расходов</h2>
+        <!-- Новая карточка для справочников -->
+        <div class="reference-card">
+            <h2>Справочники</h2>
             <form id="categoryForm">
-                <label for="category">Название категории:</label>
-                <input type="text" id="category" required>
-                <button type="submit">Добавить категорию</button>
+                <input type="text" id="category" placeholder="Введите категорию" required>
+                <button type="submit">Сохранить категорию</button>
             </form>
+            <button id="clearCategories">Очистить все категории</button>
             <ul id="categoryList"></ul>
-            <button id="clearCategories">Очистить справочник</button>
-        </section>
+
+            <!-- Справочник пользователей -->
+            <form id="userForm">
+                <input type="text" id="userName" placeholder="Введите имя пользователя" required>
+                <button type="submit">Добавить пользователя</button>
+            </form>
+            <button id="clearUsers">Очистить всех пользователей</button>
+            <ul id="userList"></ul>
+        </div>
 
     </div>
 
