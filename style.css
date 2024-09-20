@@ -1,121 +1,145 @@
-* {
+/* Основные стили */
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    padding: 20px;
-}
-
 .container {
-    max-width: 1200px;
+    width: 80%;
     margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
 }
 
 h1, h2, h3 {
-    margin-bottom: 15px;
     color: #333;
 }
 
+/* Блок с семейным бюджетом */
 .budget-display {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 10px;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
 }
 
 .budget-item {
-    flex: 1;
-    text-align: center;
+    font-size: 18px;
+    color: #555;
 }
 
-.main-content {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.income-section, .expense-section {
-    width: 48%;
-}
-
-form {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-form input, form select, form button {
-    padding: 10px;
+/* Блок с добавлением доходов */
+.income-section {
+    width: 45%;
+    float: left;
+    padding: 20px;
+    background-color: #eef;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
 }
 
-form button {
+.income-section form input, 
+.income-section form select {
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.income-section form button {
     background-color: #28a745;
-    color: #fff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
     cursor: pointer;
 }
 
-form button:hover {
-    background-color: #218838;
+.income-section ul {
+    list-style-type: none;
+    padding: 0;
 }
 
-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+.income-section ul li {
+    padding: 5px;
+    margin: 5px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+}
+
+.income-section ul li button {
     background-color: #dc3545;
     color: white;
+    border: none;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #c82333;
+/* Блок с добавлением расходов */
+.expense-section {
+    width: 45%;
+    float: right;
+    padding: 20px;
+    background-color: #ffe;
+    border: 1px solid #ccc;
 }
 
-ul {
+.expense-section form input,
+.expense-section form select {
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.expense-section form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.expense-section ul {
     list-style-type: none;
+    padding: 0;
 }
 
-ul li {
-    background-color: #f8f9fa;
-    padding: 10px;
-    margin-bottom: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+.expense-section ul li {
+    padding: 5px;
+    margin: 5px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
     display: flex;
     justify-content: space-between;
-    align-items: center;
 }
 
+.expense-section ul li button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* Блок справочников */
 .reference-card {
+    width: 100%;
     margin-top: 20px;
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
 }
 
 .tabs {
     display: flex;
-    margin-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
 }
 
 .tab-button {
-    flex: 1;
-    padding: 10px;
-    background-color: #e9ecef;
+    background-color: #f9f9f9;
     border: none;
+    padding: 10px 20px;
     cursor: pointer;
+    flex-grow: 1;
     text-align: center;
 }
 
@@ -126,8 +150,59 @@ ul li {
 
 .tab-content {
     display: none;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
 }
 
 .tab-content.active {
     display: block;
+}
+
+#categoryList, #userList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#categoryList li, #userList li {
+    padding: 5px;
+    margin: 5px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+}
+
+#categoryList li button, #userList li button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .income-section,
+    .expense-section {
+        width: 100%;
+        float: none;
+    }
+
+    .budget-display {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .budget-item {
+        margin: 10px 0;
+    }
+
+    .tabs {
+        flex-direction: column;
+    }
+
+    .tab-button {
+        width: 100%;
+        margin-bottom: 5px;
+    }
 }
