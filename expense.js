@@ -10,6 +10,15 @@ function loadExpensesFromLocalStorage() {
 
 function updateExpenses() {
     document.getElementById('totalExpenses').textContent = totalExpenses.toFixed(2);
+    updateBudgetDisplay(); // Обновляем отображение бюджета
+}
+
+function updateBudgetDisplay() {
+    const totalIncome = parseFloat(localStorage.getItem('totalIncome')) || 0;
+    const balance = totalIncome - totalExpenses;
+
+    document.getElementById('totalIncome').textContent = totalIncome.toFixed(2);
+    document.getElementById('balance').textContent = balance.toFixed(2);
 }
 
 export function initializeExpenses() {
@@ -20,10 +29,8 @@ export function initializeExpenses() {
     let expenses = loadExpensesFromLocalStorage();
     totalExpenses = parseFloat(localStorage.getItem('totalExpenses')) || 0;
 
-    expenses.forEach(expense => {
-        const expenseItem = document.createElement('li');
-        expenseItem.textContent = `Расход на ${expense.category}: ${expense.amount} руб.`;
-        expenseList.appendChild(expenseItem);
+    expenses.forEach((expense, index) => {
+        addExpenseToList(expense, index);
     });
     updateExpenses();
 
@@ -33,14 +40,12 @@ export function initializeExpenses() {
         const category = document.getElementById('categorySelect').value;
         if (isNaN(expenseValue) || !category) return;
 
-        const expenseItem = document.createElement('li');
-        expenseItem.textContent = `Расход на ${category}: ${expenseValue} руб.`;
-        expenseList.appendChild(expenseItem);
+        const expense = { category, amount: expenseValue };
+        expenses.push(expense);
+        addExpenseToList(expense, expenses.length - 1);
 
         totalExpenses += expenseValue;
         localStorage.setItem('totalExpenses', totalExpenses);
-
-        expenses.push({ category, amount: expenseValue });
         saveExpensesToLocalStorage(expenses);
 
         updateExpenses();
@@ -55,4 +60,27 @@ export function initializeExpenses() {
         expenseList.innerHTML = '';
         updateExpenses();
     });
+}
+
+function addExpenseToList(expense, index) {
+    const expenseList = document.getElementById('expenseList');
+    const expenseItem = document.createElement('li');
+    expenseItem.textContent = `Расход на ${expense.category}: ${expense.amount} руб.`;
+
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Удалить';
+    deleteButton.addEventListener('click', () => {
+        totalExpenses -= expense.amount;
+        localStorage.setItem('totalExpenses', totalExpenses);
+
+        const expenses = loadExpensesFromLocalStorage();
+        expenses.splice(index, 1);
+        saveExpensesToLocalStorage(expenses);
+
+        expenseList.removeChild(expenseItem);
+        updateExpenses();
+    });
+
+    expenseItem.appendChild(deleteButton);
+    expenseList.appendChild(expenseItem);
 }

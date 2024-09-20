@@ -1,3 +1,13 @@
+// Универсальная функция для добавления элемента в список
+function addItemToList(list, array, value, saveFunction, selectId) {
+    const item = document.createElement('li');
+    item.textContent = value;
+    addDeleteButtonToItem(item, list, array, saveFunction);
+    list.appendChild(item);
+    addOptionToSelect(selectId, value);
+}
+
+// Функция для сохранения данных в localStorage
 function saveCategoriesToLocalStorage(categories) {
     localStorage.setItem('categories', JSON.stringify(categories));
 }
@@ -31,30 +41,45 @@ function addDeleteButtonToItem(item, list, array, saveFunction) {
 export function initializeReferences() {
     const categoryList = document.getElementById('categoryList');
     const categorySelect = document.getElementById('categorySelect');
+    const userList = document.getElementById('userList');
+    const userSelect = document.getElementById('userSelect');
 
     let categories = loadCategoriesFromLocalStorage();
+    let users = loadUsersFromLocalStorage();
+
+    // Рендеринг сохраненных категорий
     categories.forEach(category => {
-        const categoryItem = document.createElement('li');
-        categoryItem.textContent = category;
-        addDeleteButtonToItem(categoryItem, categoryList, categories, saveCategoriesToLocalStorage);
-        categoryList.appendChild(categoryItem);
-        addOptionToSelect('categorySelect', category);
+        addItemToList(categoryList, categories, category, saveCategoriesToLocalStorage, 'categorySelect');
     });
 
+    // Рендеринг сохраненных пользователей
+    users.forEach(user => {
+        addItemToList(userList, users, user, saveUsersToLocalStorage, 'userSelect');
+    });
+
+    // Добавление новой категории
     document.getElementById('addCategory').addEventListener('click', () => {
         const categoryName = document.getElementById('categoryInput').value.trim();
-        if (!categoryName) return;
+        if (!categoryName || categories.includes(categoryName)) return;
 
-        const categoryItem = document.createElement('li');
-        categoryItem.textContent = categoryName;
-        addDeleteButtonToItem(categoryItem, categoryList, categories, saveCategoriesToLocalStorage);
-        categoryList.appendChild(categoryItem);
-        addOptionToSelect('categorySelect', categoryName);
+        addItemToList(categoryList, categories, categoryName, saveCategoriesToLocalStorage, 'categorySelect');
         categories.push(categoryName);
         saveCategoriesToLocalStorage(categories);
         document.getElementById('categoryInput').value = '';
     });
 
+    // Добавление нового пользователя
+    document.getElementById('addUser').addEventListener('click', () => {
+        const userName = document.getElementById('userNameInput').value.trim();
+        if (!userName || users.includes(userName)) return;
+
+        addItemToList(userList, users, userName, saveUsersToLocalStorage, 'userSelect');
+        users.push(userName);
+        saveUsersToLocalStorage(users);
+        document.getElementById('userNameInput').value = '';
+    });
+
+    // Очистка всех категорий
     document.getElementById('clearCategories').addEventListener('click', () => {
         categories = [];
         saveCategoriesToLocalStorage(categories);
@@ -62,32 +87,7 @@ export function initializeReferences() {
         categorySelect.innerHTML = '';
     });
 
-    const userList = document.getElementById('userList');
-    const userSelect = document.getElementById('userSelect');
-
-    let users = loadUsersFromLocalStorage();
-    users.forEach(user => {
-        const userItem = document.createElement('li');
-        userItem.textContent = user;
-        addDeleteButtonToItem(userItem, userList, users, saveUsersToLocalStorage);
-        userList.appendChild(userItem);
-        addOptionToSelect('userSelect', user);
-    });
-
-    document.getElementById('addUser').addEventListener('click', () => {
-        const userName = document.getElementById('userNameInput').value.trim();
-        if (!userName) return;
-
-        const userItem = document.createElement('li');
-        userItem.textContent = userName;
-        addDeleteButtonToItem(userItem, userList, users, saveUsersToLocalStorage);
-        userList.appendChild(userItem);
-        addOptionToSelect('userSelect', userName);
-        users.push(userName);
-        saveUsersToLocalStorage(users);
-        document.getElementById('userNameInput').value = '';
-    });
-
+    // Очистка всех пользователей
     document.getElementById('clearUsers').addEventListener('click', () => {
         users = [];
         saveUsersToLocalStorage(users);

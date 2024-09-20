@@ -12,6 +12,8 @@ function updateBudget() {
     const totalExpenses = parseFloat(localStorage.getItem('totalExpenses')) || 0;
     const balance = totalIncome - totalExpenses;
 
+    document.getElementById('totalIncome').textContent = totalIncome.toFixed(2);
+    document.getElementById('totalExpenses').textContent = totalExpenses.toFixed(2);
     document.getElementById('balance').textContent = balance.toFixed(2);
 }
 
@@ -21,12 +23,10 @@ export function initializeBudget() {
     const clearIncomes = document.getElementById('clearIncomes');
 
     let incomes = loadIncomesFromLocalStorage();
-    totalIncome = parseFloat(localStorage.getItem('totalIncome')) || 0;
+    totalIncome = incomes.reduce((sum, income) => sum + income.amount, 0);
 
-    incomes.forEach(income => {
-        const incomeItem = document.createElement('li');
-        incomeItem.textContent = `Доход от ${income.userName}: ${income.amount} руб.`;
-        incomeList.appendChild(incomeItem);
+    incomes.forEach((income, index) => {
+        addIncomeToList(income, index);
     });
     updateBudget();
 
@@ -36,14 +36,12 @@ export function initializeBudget() {
         const userName = document.getElementById('userSelect').value;
         if (isNaN(incomeValue) || !userName) return;
 
-        const incomeItem = document.createElement('li');
-        incomeItem.textContent = `Доход от ${userName}: ${incomeValue} руб.`;
-        incomeList.appendChild(incomeItem);
+        const income = { userName, amount: incomeValue };
+        incomes.push(income);
+        addIncomeToList(income, incomes.length - 1);
 
         totalIncome += incomeValue;
         localStorage.setItem('totalIncome', totalIncome);
-
-        incomes.push({ userName, amount: incomeValue });
         saveIncomesToLocalStorage(incomes);
 
         updateBudget();
@@ -58,4 +56,27 @@ export function initializeBudget() {
         incomeList.innerHTML = '';
         updateBudget();
     });
+}
+
+function addIncomeToList(income, index) {
+    const incomeList = document.getElementById('incomeList');
+    const incomeItem = document.createElement('li');
+    incomeItem.textContent = `Доход от ${income.userName}: ${income.amount} руб.`;
+
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Удалить';
+    deleteButton.addEventListener('click', () => {
+        totalIncome -= income.amount;
+        localStorage.setItem('totalIncome', totalIncome);
+
+        const incomes = loadIncomesFromLocalStorage();
+        incomes.splice(index, 1);
+        saveIncomesToLocalStorage(incomes);
+
+        incomeList.removeChild(incomeItem);
+        updateBudget();
+    });
+
+    incomeItem.appendChild(deleteButton);
+    incomeList.appendChild(incomeItem);
 }
