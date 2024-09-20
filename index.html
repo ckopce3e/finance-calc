@@ -56,28 +56,24 @@
 
             <!-- Вкладки -->
             <div class="tabs">
-                <button class="tab-button active" data-tab="categoriesTab">Категории</button>
-                <button class="tab-button" data-tab="usersTab">Пользователи</button>
+                <button id="categoryTab" class="tab active">Категории</button>
+                <button id="userTab" class="tab">Пользователи</button>
             </div>
 
             <!-- Содержимое вкладок -->
-            <div class="tab-content" id="categoriesTab">
-                <!-- Контент для категорий -->
+            <div id="categoryContent" class="tab-content">
                 <h3>Категории расходов</h3>
-                <!-- Поля для ввода категорий и управления ими -->
-                <input type="text" id="category" placeholder="Введите категорию">
-                <button id="addCategory">Добавить категорию</button>
+                <input type="text" id="categoryInput" placeholder="Добавить категорию">
+                <button id="addCategory">Добавить</button>
                 <button id="clearCategories">Очистить категории</button>
                 <ul id="categoryList"></ul>
             </div>
 
             <!-- Справочник пользователей -->
-            <div class="tab-content" id="usersTab" style="display: none;">
-                <!-- Контент для пользователей -->
+            <div id="userContent" class="tab-content" style="display: none;">
                 <h3>Пользователи</h3>
-                <!-- Поля для ввода пользователей и управления ими -->
-                <input type="text" id="userName" placeholder="Введите пользователя">
-                <button id="addUser">Добавить пользователя</button>
+                <input type="text" id="userNameInput" placeholder="Добавить пользователя">
+                <button id="addUser">Добавить</button>
                 <button id="clearUsers">Очистить пользователей</button>
                 <ul id="userList"></ul>
             </div>

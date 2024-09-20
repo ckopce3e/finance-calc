@@ -1,9 +1,15 @@
+let totalExpenses = 0;
+
 function saveExpensesToLocalStorage(expenses) {
     localStorage.setItem('expenses', JSON.stringify(expenses));
 }
 
 function loadExpensesFromLocalStorage() {
     return JSON.parse(localStorage.getItem('expenses')) || [];
+}
+
+function updateExpenses() {
+    document.getElementById('totalExpenses').textContent = totalExpenses.toFixed(2);
 }
 
 export function initializeExpenses() {
@@ -14,7 +20,6 @@ export function initializeExpenses() {
     let expenses = loadExpensesFromLocalStorage();
     totalExpenses = parseFloat(localStorage.getItem('totalExpenses')) || 0;
 
-    // Отображаем ранее добавленные расходы
     expenses.forEach(expense => {
         const expenseItem = document.createElement('li');
         expenseItem.textContent = `Расход на ${expense.category}: ${expense.amount} руб.`;
@@ -35,7 +40,6 @@ export function initializeExpenses() {
         totalExpenses += expenseValue;
         localStorage.setItem('totalExpenses', totalExpenses);
 
-        // Сохраняем новый расход в массив
         expenses.push({ category, amount: expenseValue });
         saveExpensesToLocalStorage(expenses);
 

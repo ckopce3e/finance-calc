@@ -1,9 +1,18 @@
+let totalIncome = 0;
+
 function saveIncomesToLocalStorage(incomes) {
     localStorage.setItem('incomes', JSON.stringify(incomes));
 }
 
 function loadIncomesFromLocalStorage() {
     return JSON.parse(localStorage.getItem('incomes')) || [];
+}
+
+function updateBudget() {
+    const totalExpenses = parseFloat(localStorage.getItem('totalExpenses')) || 0;
+    const balance = totalIncome - totalExpenses;
+
+    document.getElementById('balance').textContent = balance.toFixed(2);
 }
 
 export function initializeBudget() {
@@ -14,7 +23,6 @@ export function initializeBudget() {
     let incomes = loadIncomesFromLocalStorage();
     totalIncome = parseFloat(localStorage.getItem('totalIncome')) || 0;
 
-    // Отображаем ранее добавленные доходы
     incomes.forEach(income => {
         const incomeItem = document.createElement('li');
         incomeItem.textContent = `Доход от ${income.userName}: ${income.amount} руб.`;
@@ -35,7 +43,6 @@ export function initializeBudget() {
         totalIncome += incomeValue;
         localStorage.setItem('totalIncome', totalIncome);
 
-        // Сохраняем новый доход в массив
         incomes.push({ userName, amount: incomeValue });
         saveIncomesToLocalStorage(incomes);
 
