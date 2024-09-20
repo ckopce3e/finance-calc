@@ -10,7 +10,6 @@
     <div class="container">
         <h1>Семейный бюджет</h1>
         
-        <!-- Отображение бюджета -->
         <div class="budget-display">
             <div class="budget-item">
                 <span>Общий доход: </span><span id="totalIncome">0.00</span> руб.
@@ -23,9 +22,7 @@
             </div>
         </div>
 
-        <!-- Основной контент: Доходы и Расходы -->
         <div class="main-content">
-            <!-- Блок доходов -->
             <div class="income-section">
                 <h2>Доходы</h2>
                 <form id="incomeForm">
@@ -33,11 +30,10 @@
                     <select id="userSelect"></select>
                     <button type="submit">Добавить доход</button>
                 </form>
-                <button id="clearIncomes">Очистить все доходы</button>
+                <button id="clearIncomes" class="clear-btn">Очистить все доходы</button>
                 <ul id="incomeList"></ul>
             </div>
         
-            <!-- Блок расходов -->
             <div class="expense-section">
                 <h2>Расходы</h2>
                 <form id="expenseForm">
@@ -45,36 +41,33 @@
                     <select id="categorySelect"></select>
                     <button type="submit">Добавить расход</button>
                 </form>
-                <button id="clearExpenses">Очистить все расходы</button>
+                <button id="clearExpenses" class="clear-btn">Очистить все расходы</button>
                 <ul id="expenseList"></ul>
             </div>
         </div>
 
-        <!-- Новая карточка для справочников -->
         <div class="reference-card">
             <h2>Справочники</h2>
-
-            <!-- Вкладки -->
             <div class="tabs">
                 <button id="categoryTab" class="tab active">Категории</button>
                 <button id="userTab" class="tab">Пользователи</button>
             </div>
-
-            <!-- Содержимое вкладок -->
             <div id="categoryContent" class="tab-content">
                 <h3>Категории расходов</h3>
-                <input type="text" id="categoryInput" placeholder="Добавить категорию">
-                <button id="addCategory">Добавить</button>
-                <button id="clearCategories">Очистить категории</button>
+                <div class="reference-row">
+                    <input type="text" id="categoryInput" class="reference-input" placeholder="Введите категорию" />
+                    <button id="addCategory" class="add-btn">Добавить</button>
+                </div>
+                <button id="clearCategories" class="clear-btn">Очистить категории</button>
                 <ul id="categoryList"></ul>
             </div>
-
-            <!-- Справочник пользователей -->
             <div id="userContent" class="tab-content" style="display: none;">
                 <h3>Пользователи</h3>
-                <input type="text" id="userNameInput" placeholder="Добавить пользователя">
-                <button id="addUser">Добавить</button>
-                <button id="clearUsers">Очистить пользователей</button>
+                <div class="reference-row">
+                    <input type="text" id="userNameInput" class="reference-input" placeholder="Введите имя пользователя" />
+                    <button id="addUser" class="add-btn">Добавить</button>
+                </div>
+                <button id="clearUsers" class="clear-btn">Очистить пользователей</button>
                 <ul id="userList"></ul>
             </div>
         </div>

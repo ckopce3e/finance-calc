@@ -69,6 +69,7 @@ function addExpenseToList(expense, index) {
 
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Удалить';
+    deleteButton.className = 'delete-button';
     deleteButton.addEventListener('click', () => {
         totalExpenses -= expense.amount;
         localStorage.setItem('totalExpenses', totalExpenses);

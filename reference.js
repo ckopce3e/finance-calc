@@ -28,7 +28,7 @@ function loadUsersFromLocalStorage() {
 function addDeleteButtonToItem(item, list, array, saveFunction) {
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Удалить';
-    deleteButton.style.marginLeft = '10px';
+    deleteButton.className = 'delete-button';
     deleteButton.addEventListener('click', () => {
         const index = Array.from(list.children).indexOf(item);
         array.splice(index, 1);

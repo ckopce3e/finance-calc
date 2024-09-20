@@ -1,19 +1,74 @@
 /* Основные стили */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
 .container {
     width: 80%;
     margin: 0 auto;
     max-width: 1200px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2, h3 {
-    color: #333;
+    color: #444;
+}
+
+/* 1. Стили для кнопок очистки */
+button.clear-btn {
+    background-color: #ff7675;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px 0;
+}
+
+button.clear-btn:hover {
+    background-color: #d63031;
+}
+
+/* 2. Стили для кнопки добавления в справочниках */
+button.add-btn {
+    background-color: #00cec9;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+}
+
+button.add-btn:hover {
+    background-color: #098c86;
+}
+
+/* 3. Стили для полей ввода в справочниках */
+input[type="text"].reference-input {
+    padding: 8px 12px;
+    border: 2px solid #b2bec3;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    width: calc(100% - 130px); /* Уменьшение ширины под кнопку добавления */
+}
+
+input[type="text"].reference-input:focus {
+    border-color: #098c86;
 }
 
 /* Блок с семейным бюджетом */
@@ -21,111 +76,93 @@ h1, h2, h3 {
     display: flex;
     justify-content: space-between;
     margin: 20px 0;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
+    padding: 15px;
+    background-color: #e0f7fa;
+    border-radius: 8px;
+    border: 1px solid #b2ebf2;
 }
 
 .budget-item {
     font-size: 18px;
-    color: #555;
+    color: #00796b;
 }
 
-/* Блок с добавлением доходов */
-.income-section {
+/* Основные секции */
+.main-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Блок с добавлением доходов и расходов */
+.income-section, .expense-section {
     width: 45%;
-    float: left;
     padding: 20px;
-    background-color: #eef;
-    border: 1px solid #ccc;
+    background-color: #e1bee7;
+    border: 1px solid #d1c4e9;
+    border-radius: 8px;
+}
+
+.income-section h2, .expense-section h2 {
+    margin-top: 0;
 }
 
 .income-section form input, 
-.income-section form select {
-    margin-right: 10px;
-    padding: 5px;
-}
-
-.income-section form button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.income-section ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.income-section ul li {
-    padding: 5px;
-    margin: 5px 0;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    display: flex;
-    justify-content: space-between;
-}
-
-.income-section ul li button {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-/* Блок с добавлением расходов */
-.expense-section {
-    width: 45%;
-    float: right;
-    padding: 20px;
-    background-color: #ffe;
-    border: 1px solid #ccc;
-}
-
-.expense-section form input,
+.expense-section form input, 
+.income-section form select, 
 .expense-section form select {
     margin-right: 10px;
-    padding: 5px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
 }
 
+.income-section form button, 
 .expense-section form button {
-    background-color: #007bff;
+    background-color: #388e3c;
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 10px 15px;
     cursor: pointer;
+    border-radius: 4px;
 }
 
-.expense-section ul {
+.income-section ul, .expense-section ul {
     list-style-type: none;
     padding: 0;
 }
 
-.expense-section ul li {
-    padding: 5px;
+.income-section ul li, .expense-section ul li {
+    padding: 10px;
     margin: 5px 0;
-    background-color: #fff;
+    background-color: white;
     border: 1px solid #ccc;
+    border-radius: 4px;
     display: flex;
     justify-content: space-between;
 }
 
-.expense-section ul li button {
-    background-color: #dc3545;
+.income-section ul li button, .expense-section ul li button {
+    background-color: #d32f2f;
     color: white;
     border: none;
     cursor: pointer;
+    border-radius: 4px;
 }
 
 /* Блок справочников */
 .reference-card {
-    width: 100%;
     margin-top: 20px;
     padding: 20px;
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
+    background-color: #ffe0b2;
+    border: 1px solid #ffe57f;
+    border-radius: 8px;
+}
+
+/* Пример позиционирования кнопки добавления рядом с полем ввода */
+.reference-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .tabs {
@@ -135,24 +172,24 @@ h1, h2, h3 {
 }
 
 .tab {
-    display: inline-block;
-    padding: 10px 20px;
+    flex: 1;
+    padding: 10px;
     cursor: pointer;
-    background-color: #f1f1f1;
+    background-color: #fff;
     margin-right: 5px;
-    border-radius: 5px 5px 0 0;
+    text-align: center;
+    border-radius: 4px 4px 0 0;
 }
 
 .tab.active {
-    background-color: #ddd;
+    background-color: #a1ff82;
 }
 
 .tab-content {
     border: 1px solid #ddd;
     padding: 20px;
-    border-radius: 0 5px 5px 5px;
-    margin-top: -1px;
-    background-color: #fff;
+    border-radius: 0 4px 4px 4px;
+    background-color: white;
 }
 
 .tab-content.active {
@@ -165,19 +202,21 @@ h1, h2, h3 {
 }
 
 #categoryList li, #userList li {
-    padding: 5px;
+    padding: 10px;
     margin: 5px 0;
-    background-color: #fff;
+    background-color: white;
     border: 1px solid #ccc;
+    border-radius: 4px;
     display: flex;
     justify-content: space-between;
 }
 
 #categoryList li button, #userList li button {
-    background-color: #dc3545;
+    background-color: #d32f2f;
     color: white;
     border: none;
     cursor: pointer;
+    border-radius: 4px;
 }
 
 /* Адаптивные стили */
@@ -185,7 +224,6 @@ h1, h2, h3 {
     .income-section,
     .expense-section {
         width: 100%;
-        float: none;
     }
 
     .budget-display {
@@ -199,10 +237,5 @@ h1, h2, h3 {
 
     .tabs {
         flex-direction: column;
-    }
-
-    .tab-button {
-        width: 100%;
-        margin-bottom: 5px;
     }
 }

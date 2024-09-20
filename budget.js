@@ -65,6 +65,7 @@ function addIncomeToList(income, index) {
 
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Удалить';
+    deleteButton.className = 'delete-button';
     deleteButton.addEventListener('click', () => {
         totalIncome -= income.amount;
         localStorage.setItem('totalIncome', totalIncome);
